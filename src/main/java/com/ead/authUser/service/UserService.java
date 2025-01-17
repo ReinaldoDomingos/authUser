@@ -20,4 +20,10 @@ public interface UserService {
     boolean existsByUsername(String username);
 
     boolean existsByEmail(String email);
+
+    UserModel updateUser(UserModel user, UserRecordDto userRecordDto);
+
+    UserModel updatePassword(UserModel user, UserRecordDto userRecordDto);
+
+    UserModel updateImage(UserModel user, UserRecordDto userRecordDto);
 }
