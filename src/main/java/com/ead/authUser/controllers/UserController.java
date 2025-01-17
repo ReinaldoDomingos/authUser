@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -51,7 +52,8 @@ public class UserController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Object> updateUser(@PathVariable(value = "id") UUID id,
-                                             @RequestBody @JsonView(UserRecordDto.UserView.UserPut.class)
+                                             @RequestBody @Validated(UserRecordDto.UserView.UserPut.class)
+                                             @JsonView(UserRecordDto.UserView.UserPut.class)
                                              UserRecordDto userRecordDto) {
         var userOptional = userService.findById(id);
 
@@ -64,7 +66,8 @@ public class UserController {
 
     @PutMapping("/{id}/password")
     public ResponseEntity<Object> updatePassword(@PathVariable(value = "id") UUID id,
-                                                 @RequestBody @JsonView(UserRecordDto.UserView.PasswordPut.class)
+                                                 @RequestBody @Validated(UserRecordDto.UserView.PasswordPut.class)
+                                                 @JsonView(UserRecordDto.UserView.PasswordPut.class)
                                                  UserRecordDto userRecordDto) {
         var userOptional = userService.findById(id);
 
@@ -81,8 +84,9 @@ public class UserController {
 
     @PutMapping("/{id}/image")
     public ResponseEntity<Object> updateImage(@PathVariable(value = "id") UUID id,
-                                             @RequestBody @JsonView(UserRecordDto.UserView.ImagePut.class)
-                                             UserRecordDto userRecordDto) {
+                                              @RequestBody @Validated(UserRecordDto.UserView.ImagePut.class)
+                                              @JsonView(UserRecordDto.UserView.ImagePut.class)
+                                              UserRecordDto userRecordDto) {
         var userOptional = userService.findById(id);
 
         UserModel user = userOptional.get();
