@@ -1,5 +1,6 @@
 package com.ead.authUser.controllers;
 
+import com.ead.authUser.configs.specifications.SpecificationTemplate;
 import com.ead.authUser.dtos.UserRecordDto;
 import com.ead.authUser.models.UserModel;
 import com.ead.authUser.service.UserService;
@@ -30,8 +31,8 @@ public class UserController {
     private UserService userService;
 
     @GetMapping
-    public ResponseEntity<Page<UserModel>> getAllUsers(Pageable pageable) {
-        Page<UserModel> users = userService.findAll(pageable);
+    public ResponseEntity<Page<UserModel>> getAllUsers(SpecificationTemplate.UserSpec userSpec, Pageable pageable) {
+        Page<UserModel> users = userService.findAll(userSpec, pageable);
 
         return ResponseEntity.status(HttpStatus.OK).body(users);
     }
