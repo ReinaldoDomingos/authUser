@@ -22,6 +22,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Optional;
 import java.util.UUID;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 @RestController
 @RequestMapping("/users")
 //@CrossOrigin(origins = "*", maxAge = 3600)
@@ -32,9 +35,13 @@ public class UserController {
 
     @GetMapping
     public ResponseEntity<Page<UserModel>> getAllUsers(SpecificationTemplate.UserSpec userSpec, Pageable pageable) {
-        Page<UserModel> users = userService.findAll(userSpec, pageable);
+        Page<UserModel> usersPage = userService.findAll(userSpec, pageable);
 
-        return ResponseEntity.status(HttpStatus.OK).body(users);
+        usersPage.getContent().forEach(user ->
+                user.add(linkTo(methodOn(UserController.class).getUserById(user.getId())).withSelfRel())
+        );
+
+        return ResponseEntity.status(HttpStatus.OK).body(usersPage);
     }
 
     @GetMapping("/{id}")
