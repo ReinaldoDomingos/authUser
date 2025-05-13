@@ -1,6 +1,6 @@
 package com.ead.authUser.controllers;
 
-import com.ead.authUser.configs.specifications.SpecificationTemplate;
+import com.ead.authUser.specifications.SpecificationTemplate;
 import com.ead.authUser.dtos.UserRecordDto;
 import com.ead.authUser.models.UserModel;
 import com.ead.authUser.service.UserService;

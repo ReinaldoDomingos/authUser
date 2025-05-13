@@ -1,4 +1,4 @@
-package com.ead.authUser.configs.specifications;
+package com.ead.authUser.specifications;
 
 import com.ead.authUser.models.UserModel;
 import net.kaczmarzyk.spring.data.jpa.domain.Equal;
